@@ -1,3 +1,7 @@
 /car_data_v2
 /splited_dataset
 /yolo_venv
+/runs
+yolov8n.pt
+yolov10s.pt
+cuda

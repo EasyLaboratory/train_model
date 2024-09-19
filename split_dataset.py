@@ -6,7 +6,7 @@ import shutil
 base_path = Path(__file__).parent.resolve()
 print(base_path)
 
-def split_dataset(base_path,dataset_path,split_data_path,train_ratio=0.2,val_ratio=0.6,test_ratio=0.2):
+def split_dataset(base_path,dataset_path,split_data_path,train_ratio=0.6,val_ratio=0.2,test_ratio=0.2):
     """
        split the dataset into train test val folder
     Args:
@@ -23,10 +23,7 @@ def split_dataset(base_path,dataset_path,split_data_path,train_ratio=0.2,val_rat
     labels_path = dataset_path/"labels"
 
     splited_data_path = base_path/split_data_path
-    # if Path.exists(splited_data_path):
-    #     print("the splited dataset already exists")
-    # else:
-    #    Path.mkdir(splited_data_path)
+    
     for folder in ["train","val","test"]:
         (splited_data_path/"images"/folder).mkdir(parents=True,exist_ok=True)
         (splited_data_path/"labels"/folder).mkdir(parents=True,exist_ok=True)
@@ -43,22 +40,22 @@ def split_dataset(base_path,dataset_path,split_data_path,train_ratio=0.2,val_rat
     val_files = image_files[train_size:train_size+val_size]
     test_files = image_files[train_size+val_size:]
     
-    copy_file(train_files,labels_path,splited_data_path)
+    copy_file(train_files,labels_path,splited_data_path,"train")
+    copy_file(val_files,labels_path,splited_data_path,"val")
+    copy_file(test_files,labels_path,splited_data_path,"test")
+
+ 
 
     
 
 
-def copy_file(file_list,labels_path,dest_data_path:Path):
-    for data_type in ["train","val","test"]:
-        for file in file_list:
-            des_image_path = dest_data_path/"images"/data_type/file.name
-            # shutil.copy(str(file),str(des_image_path))
-            print(file)
-            print(des_image_path)
-            print("-----------------------------")
-            # label_file = labels_path/file.with_suffix(".txt").name
-            # dest_label_path = dest_data_path/"labels"/data_type/label_file.name
-            # shutil.copy(str(label_file),str(dest_label_path))
+def copy_file(file_list,labels_path,dest_data_path:Path,data_type:str):
+    for file in file_list:
+        des_image_path = dest_data_path/"images"/data_type/file.name
+        shutil.copy(str(file),str(des_image_path))
+        label_file = labels_path/file.with_suffix(".txt").name
+        dest_label_path = dest_data_path/"labels"/data_type/label_file.name
+        shutil.copy(str(label_file),str(dest_label_path))
 
 
 

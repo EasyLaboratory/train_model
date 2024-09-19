@@ -1,0 +1,12 @@
+dataset_dir: /home/wuyu/easyLabProjects/train_yolo/splited_dataset
+train: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/images/train
+val: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/images/val
+test: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/images/test
+
+
+train_labels: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/labels/train
+val_labels: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/labels/val
+test_labels: /home/wuyu/easyLabProjects/train_yolo/splited_dataset/labels/test
+
+nc: 1
+names: ["Car"]
